@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">My Application3</string>
+    <string name="action_item0">Select Country</string>
+    <string name="action_item1">Settings</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="voronezh">Voronezh</string>
+    <string name="belgorod">Belgorod</string>
+    <string name="title_activity_main3">Main3Activity</string>
+
+
+    <item name="img2" type="id">C:\Users\mape0515\Pictures\pmbg_01-3.jpg</item>
+</resources>

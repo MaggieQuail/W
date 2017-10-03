@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mape0515.myapplication3.WeatherSettingsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+            android:id="@+id/rangeSeekbar4"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            app:bar_color="#EE88F7"
+            app:bar_highlight_color="#D810EA"
+            app:corner_radius="100"
+            app:data_type="_integer"
+            app:left_thumb_color="#8D0D99"
+            app:left_thumb_color_pressed="#56005E"
+            app:max_value="40"
+            app:min_value="-30"
+            app:right_thumb_color="#8D0D99"
+            app:right_thumb_color_pressed="#56005E"
+            android:layout_weight="0.14" />
+
+        <TableLayout
+            android:id="@+id/lay1"
+            android:layout_width="match_parent"
+            android:layout_height="27dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAlignment="textEnd" />
+            </TableRow>
+        </TableLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:id="@+id/rangeSeekbar3"
+                android:layout_width="368dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                app:bar_color="#EE88F7"
+                app:bar_highlight_color="#D810EA"
+                app:corner_radius="100"
+                app:data_type="_integer"
+                app:left_thumb_color="#8D0D99"
+                app:left_thumb_color_pressed="#56005E"
+                app:max_value="40"
+                app:min_value="-30"
+                app:right_thumb_color="#8D0D99"
+                app:right_thumb_color_pressed="#56005E" />
+
+            <TableLayout
+                android:id="@+id/lay2"
+                android:layout_width="608dp"
+                android:layout_height="27dp"
+                android:layout_weight="0.02">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView" />
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="175dp"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+        </TableLayout>
+        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+            android:id="@+id/rangeSeekbar2"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            app:bar_color="#EE88F7"
+            app:bar_highlight_color="#D810EA"
+            app:corner_radius="100"
+            app:data_type="_integer"
+            app:left_thumb_color="#8D0D99"
+            app:left_thumb_color_pressed="#56005E"
+            app:max_value="40"
+            app:min_value="-30"
+            app:right_thumb_color="#8D0D99"
+            app:right_thumb_color_pressed="#56005E" />
+
+        <TableLayout
+            android:id="@+id/lay3"
+            android:layout_width="match_parent"
+            android:layout_height="28dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAlignment="textEnd" />
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+
+
+    <!--<com.crystal.crystalrangeseekbar.widgets.BubbleThumbRangeSeekbar-->
+        <!--android:id="@+id/rangeSeekbar5"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:corner_radius="5"-->
+        <!--app:min_value="-30"-->
+        <!--app:max_value="40"-->
+        <!--app:steps="5"-->
+        <!--app:bar_color="#F7BB88"-->
+        <!--app:bar_highlight_color="#E07416"-->
+        <!--android:layout_marginTop="150dp"-->
+        <!--app:left_thumb_color="#E07416"-->
+        <!--app:right_thumb_color="#E07416"-->
+        <!--app:left_thumb_color_pressed="#775E4F"-->
+        <!--app:right_thumb_color_pressed="#4C2D1A"-->
+        <!--app:data_type="_integer"/>-->
+
+</android.support.design.widget.CoordinatorLayout>
