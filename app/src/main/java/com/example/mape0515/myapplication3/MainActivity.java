@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.squareup.picasso.Picasso;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         } catch (XmlPullParserException | ParseException | IOException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+        ImageView ivMain = (ImageView) findViewById(R.id.imageView8);
+        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(ivMain);
+        Glide.with(this).load("http://s12.favim.com/orig/160215/funny-gif-harleen-quinzel-harley-quinn-Favim.com-4002232.gif").into(imageViewTarget);
     }
 
     @Override
@@ -103,9 +108,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     getDetaledImage(result);
                     executor.shutdown();
                     Map curPict = ap.parser(curCity);
-
+                    Log.e(TAG, "curPict" + curPict);
                     c = String.valueOf(curPict.get("temp_c"));
                     w = String.valueOf(curPict.get("weather"));
+                    Log.e(TAG, "uri1" + curPict.get("icon_url"));
+
                     getImage(String.valueOf(curPict.get("icon_url")));
                 } catch (IOException | InterruptedException | ExecutionException | ParseException | XmlPullParserException e) {
                     e.printStackTrace();
@@ -153,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         Picasso.with(this).load(uri.get("fri").toString()).into(iv5);
         Picasso.with(this).load(uri.get("sat").toString()).into(iv6);
         Picasso.with(this).load(uri.get("sun").toString()).into(iv7);
-
 
     }
 

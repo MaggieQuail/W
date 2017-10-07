@@ -1,10 +1,8 @@
 package com.example.mape0515.myapplication3;
 
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,8 +51,8 @@ public class DetaledForecastParser implements Callable {
         JSONObject sat = new JSONObject(forecast3.get(12).toString());
         JSONObject sun = new JSONObject(forecast3.get(14).toString());
 
-        String fore1 = String.valueOf(mon.get("icon_url"));
-        Log.e(TAG, "for1 = " + fore1   );
+//        String fore1 = String.valueOf(mon.get("icon_url"));
+//        Log.e(TAG, "for1 = " + fore1   );
 
         Map mp = new HashMap();
         mp.put("mon", String.valueOf(mon.get("icon_url")));

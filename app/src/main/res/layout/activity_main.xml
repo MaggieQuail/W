@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swipe_container"
+    android:background="@mipmap/bg"
     tools:context="com.example.mape0515.myapplication3.MainActivity">
 
     <!--<RadioButton-->
@@ -42,12 +43,11 @@
                     android:textSize="50sp"
                     android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button2"
+                <ImageView
+                    android:id="@+id/imageView8"
                     android:layout_width="match_parent"
-                    android:layout_height="129dp"
-                    android:elevation="12dp"
-                    android:visibility="invisible" />
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <TableLayout
                     android:id="@+id/tLay"
@@ -64,8 +64,8 @@
                             android:id="@+id/imageView"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            app:srcCompat="@android:drawable/gallery_thumb"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            app:srcCompat="@android:drawable/gallery_thumb" />
 
                         <TextView
                             android:id="@+id/textView3"
@@ -258,7 +258,7 @@
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_marginBottom="16dp" />
                 </TableLayout>
 
             </LinearLayout>
