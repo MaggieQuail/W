@@ -23,7 +23,7 @@ class MyCallable implements Callable {
 
     @Override
     public Object call() throws Exception {
-        String urlStr = "http://api.wunderground.com/api/bc14ae46e64889cc/conditions/lang:RU/q/CA/";
+        String urlStr = "http://api.wunderground.com/api/bc14ae46e64889cc/conditions/lang:EN/q/CA/";
         URL url = new URL(urlStr + origin + ".xml");
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         XmlPullParser parser = factory.newPullParser();

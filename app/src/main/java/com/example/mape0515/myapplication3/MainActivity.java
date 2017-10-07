@@ -1,11 +1,10 @@
 package com.example.mape0515.myapplication3;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,12 +16,13 @@ import com.squareup.picasso.Picasso;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
 import java.text.ParseException;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     public static final String TAG = "MAPE";
@@ -90,31 +90,30 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 final APISupport ap = new APISupport();
                 mSwipeRefreshLayout.setRefreshing(false);
                 TableLayout tableLayout = (TableLayout) findViewById(R.id.tLay);
-                TextView tViewD = (TextView) findViewById(R.id.textView3);
-                TextView tView6 = (TextView) findViewById(R.id.textView6);
-
-
 
                 if (curCity == null)
                     curCity = "Voronezh";
-                ImageView iv = (ImageView) findViewById(R.id.imageView);
-
-                ImageView iv1 = (ImageView) findViewById(R.id.imageView);
-                ImageView iv2 = (ImageView) findViewById(R.id.imageView);
-                ImageView iv3 = (ImageView) findViewById(R.id.imageView);
-                ImageView iv4 = (ImageView) findViewById(R.id.imageView);
-                ImageView iv5 = (ImageView) findViewById(R.id.imageView);
-                ImageView iv6 = (ImageView) findViewById(R.id.imageView);
-                ImageView iv7 = (ImageView) findViewById(R.id.imageView);
-
-
-                getImage();
+                String c = null, w = null;
                 try {
-                    tViewD.setText((ap.parser(curCity).get("weather")).toString());
-                    tView6.setText("  "+(ap.parser(curCity).get("temp_c")).toString()+"  ебучих градуса");
+                    ExecutorService executor = Executors.newFixedThreadPool(5);
+                    // Callable<Map> task = new APISupport();
+                    Future future = executor.submit(new DetaledForecastParser("Voronezh"));
+                    Log.e(TAG, "start future111" + future);
+                    Map result = (Map) future.get();
+                    getDetaledImage(result);
+                    executor.shutdown();
+                    Map curPict = ap.parser(curCity);
+
+                    c = String.valueOf(curPict.get("temp_c"));
+                    w = String.valueOf(curPict.get("weather"));
+                    getImage(String.valueOf(curPict.get("icon_url")));
                 } catch (IOException | InterruptedException | ExecutionException | ParseException | XmlPullParserException e) {
                     e.printStackTrace();
                 }
+
+                TextView tViewD = (TextView) findViewById(R.id.textView3);
+                tViewD.setText( "  "+ w + ",  " + c + "  fucking degree");
+
                 tableLayout.setVisibility(View.VISIBLE);
 
             }
@@ -122,9 +121,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
-    void getImage() {
-        ImageView iv = (ImageView) findViewById(R.id.imageView);
-
+    void getDetaledImage(Map uri) {
         ImageView iv1 = (ImageView) findViewById(R.id.imageView1);
         ImageView iv2 = (ImageView) findViewById(R.id.imageView2);
         ImageView iv3 = (ImageView) findViewById(R.id.imageView3);
@@ -132,15 +129,39 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         ImageView iv5 = (ImageView) findViewById(R.id.imageView5);
         ImageView iv6 = (ImageView) findViewById(R.id.imageView6);
         ImageView iv7 = (ImageView) findViewById(R.id.imageView7);
-        Picasso.with(this).load("http://icons.wxug.com/i/c/k/partlycloudy.gif").into(iv);
 
-        Picasso.with(this).load("http://icons.wxug.com/i/c/k/partlycloudy.gif").into(iv1);
-        Picasso.with(this).load("http://icons.wxug.com/i/c/k/partlycloudy.gif").into(iv2);
-        Picasso.with(this).load("http://icons.wxug.com/i/c/k/partlycloudy.gif").into(iv3);
-        Picasso.with(this).load("http://icons.wxug.com/i/c/k/partlycloudy.gif").into(iv4);
-        Picasso.with(this).load("http://icons.wxug.com/i/c/k/partlycloudy.gif").into(iv5);
-        Picasso.with(this).load("http://icons.wxug.com/i/c/k/partlycloudy.gif").into(iv6);
-        Picasso.with(this).load("http://icons.wxug.com/i/c/k/partlycloudy.gif").into(iv7);
+        TextView tView5 = (TextView) findViewById(R.id.textView5);
+        TextView tView7 = (TextView) findViewById(R.id.textView7);
+        TextView tView8 = (TextView) findViewById(R.id.textView8);
+        TextView tView9 = (TextView) findViewById(R.id.textView9);
+        TextView tView13 = (TextView) findViewById(R.id.textView13);
+        TextView tView14 = (TextView) findViewById(R.id.textView14);
+        TextView tView15 = (TextView) findViewById(R.id.textView15);
+
+        tView5.setText (uri.get("mond").toString().substring(0, 2));
+        tView7.setText (uri.get("tued").toString().substring(0, 2));
+        tView8.setText (uri.get("wedd").toString().substring(0, 2));
+        tView9.setText (uri.get("thud").toString().substring(0, 2));
+        tView13.setText(uri.get("frid").toString().substring(0, 2));
+        tView14.setText(uri.get("satd").toString().substring(0, 2));
+        tView15.setText(uri.get("sund").toString().substring(0, 2));
+
+        Picasso.with(this).load(uri.get("mon").toString()).into(iv1);
+        Picasso.with(this).load(uri.get("tue").toString()).into(iv2);
+        Picasso.with(this).load(uri.get("wed").toString()).into(iv3);
+        Picasso.with(this).load(uri.get("thu").toString()).into(iv4);
+        Picasso.with(this).load(uri.get("fri").toString()).into(iv5);
+        Picasso.with(this).load(uri.get("sat").toString()).into(iv6);
+        Picasso.with(this).load(uri.get("sun").toString()).into(iv7);
+
+
+    }
+
+    void getImage(String uri) {
+        Log.e(TAG, "uri" + uri);
+        ImageView iv = (ImageView) findViewById(R.id.imageView);
+        Picasso.with(this).load(uri).into(iv);
+
 
 
     }
