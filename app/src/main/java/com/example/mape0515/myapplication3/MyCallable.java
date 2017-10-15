@@ -60,6 +60,10 @@ class MyCallable implements Callable {
                     String icon_url = parser.nextText();
                     mp.put("icon_url", icon_url);
                 }
+//                if (parser.getName().equals("weather")) {
+//                    String weather = parser.nextText();
+//                    mp.put("weather", weather);
+//                }
 
 //                if (parser.getName().equals("local_time_rfc822")) {
 //                  //  date = new Date () parser.nextText());

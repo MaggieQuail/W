@@ -18,7 +18,7 @@ class APISupport{
 
 
     Map parser(String urlEnd) throws IOException, XmlPullParserException, ParseException, ExecutionException, InterruptedException {
-        ExecutorService executor = Executors.newFixedThreadPool(5);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
        // Callable<Map> task = new APISupport();
         Future future = executor.submit(new MyCallable(urlEnd));
         Log.e(TAG, "start future" + future);

@@ -1,6 +1,7 @@
 package com.example.mape0515.myapplication3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private TextView tView;
     String curCity = null;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         WeatherHandler wh = new WeatherHandler();
+//        sharedPreferences = getPreferences(MODE_PRIVATE);
+//        SharedPreferences.Editor ed= sharedPreferences.edit();
+//        ed.putString("", "");
 
         try {
 //            if (curCity == null)
@@ -59,13 +64,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
         ImageView ivMain = (ImageView) findViewById(R.id.imageView8);
         GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(ivMain);
-        Glide.with(this).load("http://s12.favim.com/orig/160215/funny-gif-harleen-quinzel-harley-quinn-Favim.com-4002232.gif").into(imageViewTarget);
+        Glide.with(this).load("https://68difg-dm2305.files.1drv.com/y4m5LVC-XkLkrS9XydoTCGMWLYYfWzC7G83qOvBYFdWLd8tl3kqr11KxhUxD1mPvJShSD2jKpnuTTMKObS_UAxCeyHHNDR55JCVWEHmMQIQ8KuqjneR3IELMZtnCn8OXgDQHYjeeKWl6TIOT_ESQvtSRSwSCx9wlT3yZf9w23UIR-1toViGOAZDshOl8T9Uq3zCyqwA05G_QGIEf_IudiiOoA/os.gif?psid=1").into(imageViewTarget);
+      //  Glide.with(this).load("http://cs5-2.4pda.to/8968725.gif").into(imageViewTarget);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //   getMenuInflater().inflate(R.menu.menu_main, menu);
+           getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -75,13 +81,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (id == R.id.action_item0) {
             // Toast.makeText(MainActivity.this, getString(R.string.action_item0),Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, CitySettingActivity.class);
+            Intent intent = new Intent(this, Main2Activity.class);
             startActivity(intent);
         }
         if (id == R.id.action_item1) {
             // Toast.makeText(MainActivity.this, getString(R.string.action_item0),Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, WeatherSettingsActivity.class);
+            Intent intent = new Intent(this, Main3Activity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -95,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 final APISupport ap = new APISupport();
                 mSwipeRefreshLayout.setRefreshing(false);
                 TableLayout tableLayout = (TableLayout) findViewById(R.id.tLay);
+                View tableLayH =  findViewById(R.id.lynH);
 
                 if (curCity == null)
                     curCity = "Voronezh";
@@ -122,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 tViewD.setText( "  "+ w + ",  " + c + "  fucking degree");
 
                 tableLayout.setVisibility(View.VISIBLE);
+                tableLayH.setVisibility(View.VISIBLE);
 
             }
         });

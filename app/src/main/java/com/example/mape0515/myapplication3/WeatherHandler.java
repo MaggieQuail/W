@@ -18,21 +18,26 @@ class WeatherHandler {
 
     String weatherHandler() throws ParseException, XmlPullParserException, IOException, ExecutionException, InterruptedException {
         //  String weatherHandler(String region, int tempMin, int tempMax)
-        int tempP = 0, plessure = 0, humidity = 0, wind = 0;
+        int tempP = 0, plessure = 0,
+        wind = 0;
+        String humidity = null;
         APISupport ap = new APISupport();
         Map<String, Integer> weatherMap = ap.parser("Voronezh");
-        Log.e(TAG, "weatherMap" + weatherMap.size());
+     // Log.e(TAG, "weatherMap" + weatherMap.size());
         for (Map.Entry entry : weatherMap.entrySet()) {
-            Log.e(TAG, "entry" + entry.getKey());
-
+           // Log.e(TAG, "entry" + entry.getKey());
+            Log.e(TAG, "tempP1111" );
             if (entry.getKey().equals("temp_c")) {
+                Log.e(TAG, "tempP" );
                 tempP = (int) entry.getValue();
             }
             if (entry.getKey().equals("pressure_mb")) {
                 plessure = (int) entry.getValue();
             }
             if (entry.getKey().equals("relative_humidity")) {
-                humidity = (int) entry.getValue();
+                Log.e(TAG, "humidity" + humidity);
+                 humidity =  entry.getValue().toString().substring(0, 2);
+                Log.e(TAG, "humidity" + humidity);
             }
             if (entry.getKey().equals("wind_kph")) {
                 wind = (int) entry.getValue();
@@ -49,18 +54,22 @@ class WeatherHandler {
         Log.e(TAG, "currentMounth" + currentMounth);
 
         if (currentMounth > 8 && currentMounth < 12) {
+            Log.e(TAG, "atumn" );
             if (currentHour > 6 && currentHour < 12) {
                 if (tempP > -3 && tempP < 20) {
+                    if(Integer.parseInt(humidity)>10 & Integer.parseInt(humidity)<70)
                     return String.valueOf(true);
                 }
             } else {
                 if (currentHour >= 12 && currentHour < 17) {
                     if (tempP > 5 && tempP < 25) {
+                        if(Integer.parseInt(humidity)>10 & Integer.parseInt(humidity)<70)
                         return String.valueOf(true);
                     }
                 } else {
                     if (currentHour >= 17 && currentHour < 20) {
                         if (tempP > 0 && tempP < 20) {
+                            if(Integer.parseInt(humidity)>10 & Integer.parseInt(humidity)<70)
                             return String.valueOf(true);
                         }
                     } else {
