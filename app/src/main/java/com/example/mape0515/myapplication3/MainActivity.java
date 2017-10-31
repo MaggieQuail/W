@@ -1,7 +1,6 @@
 package com.example.mape0515.myapplication3;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -32,46 +31,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private TextView tView;
     String curCity = null;
-    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(TAG, "START ");
         setContentView(R.layout.activity_main);
-        tView = (TextView) findViewById(R.id.textView);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        WeatherHandler wh = new WeatherHandler();
-//        sharedPreferences = getPreferences(MODE_PRIVATE);
-//        SharedPreferences.Editor ed= sharedPreferences.edit();
-//        ed.putString("", "");
-
-        try {
-//            if (curCity == null)
-//                curCity = "Voronezh";
-            if (wh.weatherHandler().equals("false")) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        tView.setText("Not OK");
-                    }
-                });
-            } else {
-                tView.setText("OK");
-            }
-        } catch (XmlPullParserException | ParseException | IOException | InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-        ImageView ivMain = (ImageView) findViewById(R.id.imageView8);
-        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(ivMain);
-        Glide.with(this).load("https://68difg-dm2305.files.1drv.com/y4m5LVC-XkLkrS9XydoTCGMWLYYfWzC7G83qOvBYFdWLd8tl3kqr11KxhUxD1mPvJShSD2jKpnuTTMKObS_UAxCeyHHNDR55JCVWEHmMQIQ8KuqjneR3IELMZtnCn8OXgDQHYjeeKWl6TIOT_ESQvtSRSwSCx9wlT3yZf9w23UIR-1toViGOAZDshOl8T9Uq3zCyqwA05G_QGIEf_IudiiOoA/os.gif?psid=1").into(imageViewTarget);
-      //  Glide.with(this).load("http://cs5-2.4pda.to/8968725.gif").into(imageViewTarget);
+        BLog();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-           getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -79,29 +52,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_item0) {
-            // Toast.makeText(MainActivity.this, getString(R.string.action_item0),Toast.LENGTH_LONG).show();
-
             Intent intent = new Intent(this, Main2Activity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         }
         if (id == R.id.action_item1) {
-            // Toast.makeText(MainActivity.this, getString(R.string.action_item0),Toast.LENGTH_LONG).show();
-
-            Intent intent = new Intent(this, Main3Activity.class);
-            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onRefresh() {
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 final APISupport ap = new APISupport();
                 mSwipeRefreshLayout.setRefreshing(false);
                 TableLayout tableLayout = (TableLayout) findViewById(R.id.tLay);
-                View tableLayH =  findViewById(R.id.lynH);
+                View tableLayH = findViewById(R.id.lynH);
 
                 if (curCity == null)
                     curCity = "Voronezh";
@@ -109,12 +77,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 try {
                     ExecutorService executor = Executors.newFixedThreadPool(5);
                     // Callable<Map> task = new APISupport();
-                    Future future = executor.submit(new DetaledForecastParser("Voronezh"));
+                    Future future = executor.submit(new DetaledForecastParser(curCity));
                     Log.e(TAG, "start future111" + future);
                     Map result = (Map) future.get();
                     getDetaledImage(result);
                     executor.shutdown();
                     Map curPict = ap.parser(curCity);
+
                     Log.e(TAG, "curPict" + curPict);
                     c = String.valueOf(curPict.get("temp_c"));
                     w = String.valueOf(curPict.get("weather"));
@@ -126,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
 
                 TextView tViewD = (TextView) findViewById(R.id.textView3);
-                tViewD.setText( "  "+ w + ",  " + c + "  fucking degree");
+                tViewD.setText("  " + w + ",  " + c + "  fucking degree");
 
                 tableLayout.setVisibility(View.VISIBLE);
                 tableLayH.setVisibility(View.VISIBLE);
@@ -153,10 +122,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         TextView tView14 = (TextView) findViewById(R.id.textView14);
         TextView tView15 = (TextView) findViewById(R.id.textView15);
 
-        tView5.setText (uri.get("mond").toString().substring(0, 2));
-        tView7.setText (uri.get("tued").toString().substring(0, 2));
-        tView8.setText (uri.get("wedd").toString().substring(0, 2));
-        tView9.setText (uri.get("thud").toString().substring(0, 2));
+        tView5.setText(uri.get("mond").toString().substring(0, 2));
+        tView7.setText(uri.get("tued").toString().substring(0, 2));
+        tView8.setText(uri.get("wedd").toString().substring(0, 2));
+        tView9.setText(uri.get("thud").toString().substring(0, 2));
         tView13.setText(uri.get("frid").toString().substring(0, 2));
         tView14.setText(uri.get("satd").toString().substring(0, 2));
         tView15.setText(uri.get("sund").toString().substring(0, 2));
@@ -171,12 +140,60 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
+
     void getImage(String uri) {
         Log.e(TAG, "uri" + uri);
         ImageView iv = (ImageView) findViewById(R.id.imageView);
         Picasso.with(this).load(uri).into(iv);
 
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e(TAG, "work=");
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                String result = data.getStringExtra("result");
+                curCity = result;
+                BLog();
+                Log.e(TAG, "result===" + result);
+            }
+            if (resultCode == RESULT_CANCELED) {
+
+            }
+        }
+    }
+
+    private void BLog() {
+        tView = (TextView) findViewById(R.id.textView);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        WeatherHandler wh = new WeatherHandler();
+        try {
+            if (curCity == null)
+                curCity = "Voronezh";
+            if (wh.weatherHandler(curCity).equals("false")) {
+                tView.setText("Not OK");
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        tView.setText("Not OK");
+//                    }
+//                });
+            } else {
+                if (wh.weatherHandler(curCity).equals("false")) {
+                    tView.setText("OK");
+                }
+                else{
+                    tView.setText("Hhmmm...");
+                }
+            }
+        } catch (XmlPullParserException | ParseException | IOException | InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        ImageView ivMain = (ImageView) findViewById(R.id.imageView8);
+        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(ivMain);
+        Glide.with(this).load("https://68difg-dm2305.files.1drv.com/y4m5LVC-XkLkrS9XydoTCGMWLYYfWzC7G83qOvBYFdWLd8tl3kqr11KxhUxD1mPvJShSD2jKpnuTTMKObS_UAxCeyHHNDR55JCVWEHmMQIQ8KuqjneR3IELMZtnCn8OXgDQHYjeeKWl6TIOT_ESQvtSRSwSCx9wlT3yZf9w23UIR-1toViGOAZDshOl8T9Uq3zCyqwA05G_QGIEf_IudiiOoA/os.gif?psid=1").into(imageViewTarget);
 
     }
 }

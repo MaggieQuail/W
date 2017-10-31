@@ -35,13 +35,13 @@ public class WeatherSettingsActivity extends AppCompatActivity {
                 tvMin.setText(String.valueOf(minValue));
                 tvMax.setText(String.valueOf(maxValue));
                 WeatherHandler wh = new WeatherHandler();
-                try {
-                    Log.e(TAG, minValue + "  " + minValue);
-                    wh.weatherHandler();
-                   // wh.weatherHandler("Voronezh", minValue.intValue(), maxValue.intValue());
-                } catch (ParseException | InterruptedException | ExecutionException | IOException | XmlPullParserException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Log.e(TAG, minValue + "  " + minValue);
+//                //    wh.weatherHandler();
+//                   // wh.weatherHandler("Voronezh", minValue.intValue(), maxValue.intValue());
+//                } catch (ParseException | InterruptedException | ExecutionException | IOException | XmlPullParserException e) {
+//                    e.printStackTrace();
+//                }
 
             }
         });

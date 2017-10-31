@@ -53,6 +53,10 @@ public class DetaledForecastParser implements Callable {
 
 //        String fore1 = String.valueOf(mon.get("icon_url"));
 //        Log.e(TAG, "for1 = " + fore1   );
+        Log.e(TAG, mon + "  " + mon.get("title"));
+        Log.e(TAG, tue + "  " + tue.get("title"));
+        Log.e(TAG, wed + "  " +wed.get("title"));
+
 
         Map mp = new HashMap();
         mp.put("mon", String.valueOf(mon.get("icon_url")));
