@@ -17,16 +17,11 @@
             android:layout_width="368dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            app:bar_color="#EE88F7"
-            app:bar_highlight_color="#D810EA"
+
+
             app:corner_radius="100"
             app:data_type="_integer"
-            app:left_thumb_color="#8D0D99"
-            app:left_thumb_color_pressed="#56005E"
-            app:max_value="40"
-            app:min_value="-30"
-            app:right_thumb_color="#8D0D99"
-            app:right_thumb_color_pressed="#56005E"
+
             android:layout_weight="0.14" />
 
         <TableLayout
@@ -54,21 +49,21 @@
             </TableRow>
         </TableLayout>
 
-            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-                android:id="@+id/rangeSeekbar3"
-                android:layout_width="368dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                app:bar_color="#EE88F7"
-                app:bar_highlight_color="#D810EA"
-                app:corner_radius="100"
-                app:data_type="_integer"
-                app:left_thumb_color="#8D0D99"
-                app:left_thumb_color_pressed="#56005E"
-                app:max_value="40"
-                app:min_value="-30"
-                app:right_thumb_color="#8D0D99"
-                app:right_thumb_color_pressed="#56005E" />
+            <!--<com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar-->
+                <!--android:id="@+id/rangeSeekbar3"-->
+                <!--android:layout_width="368dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="80dp"-->
+                <!--app:bar_color="#EE88F7"-->
+                <!--app:bar_highlight_color="#D810EA"-->
+                <!--app:corner_radius="100"-->
+                <!--app:data_type="_integer"-->
+                <!--app:left_thumb_color="#8D0D99"-->
+                <!--app:left_thumb_color_pressed="#56005E"-->
+                <!--app:max_value="40"-->
+                <!--app:min_value="-30"-->
+                <!--app:right_thumb_color="#8D0D99"-->
+                <!--app:right_thumb_color_pressed="#56005E" />-->
 
             <TableLayout
                 android:id="@+id/lay2"
@@ -96,21 +91,21 @@
                 </TableRow>
 
         </TableLayout>
-        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-            android:id="@+id/rangeSeekbar2"
-            android:layout_width="368dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            app:bar_color="#EE88F7"
-            app:bar_highlight_color="#D810EA"
-            app:corner_radius="100"
-            app:data_type="_integer"
-            app:left_thumb_color="#8D0D99"
-            app:left_thumb_color_pressed="#56005E"
-            app:max_value="40"
-            app:min_value="-30"
-            app:right_thumb_color="#8D0D99"
-            app:right_thumb_color_pressed="#56005E" />
+        <!--<com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar-->
+            <!--android:id="@+id/rangeSeekbar2"-->
+            <!--android:layout_width="368dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="80dp"-->
+            <!--app:bar_color="#EE88F7"-->
+            <!--app:bar_highlight_color="#D810EA"-->
+            <!--app:corner_radius="100"-->
+            <!--app:data_type="_integer"-->
+            <!--app:left_thumb_color="#8D0D99"-->
+            <!--app:left_thumb_color_pressed="#56005E"-->
+            <!--app:max_value="40"-->
+            <!--app:min_value="-30"-->
+            <!--app:right_thumb_color="#8D0D99"-->
+            <!--app:right_thumb_color_pressed="#56005E" />-->
 
         <TableLayout
             android:id="@+id/lay3"

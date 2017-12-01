@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             startActivityForResult(intent, 1);
         }
         if (id == R.id.action_item1) {
+            Intent intent = new Intent(this, Main3Activity.class);
+            startActivityForResult(intent, 1);
         }
         return super.onOptionsItemSelected(item);
     }
