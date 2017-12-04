@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private TextView tView;
     String curCity = null;
+ //   String minTemp;
 
 
     @Override
@@ -152,13 +153,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e(TAG, "work=");
+        Log.e(TAG, "work1=" + requestCode);
         if (requestCode == 1) {
+            Log.e(TAG, "if1=" + resultCode);
             if (resultCode == RESULT_OK) {
-                String result = data.getStringExtra("result");
-                curCity = result;
+                Log.e(TAG, "if2=");
+                String cityResult = data.getStringExtra("result");
+                Log.e(TAG, "11111" );
+                curCity = cityResult;
+
+                Log.e(TAG, "minTemp===" + data.getStringExtra("Min"));
+               String minTemp = data.getStringExtra("Min");
+                Log.e(TAG, "minTemp===" + minTemp);
                 BLog();
-                Log.e(TAG, "result===" + result);
+                Log.e(TAG, "result===" + cityResult);
             }
             if (resultCode == RESULT_CANCELED) {
 
@@ -174,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         try {
             if (curCity == null)
                 curCity = "Voronezh";
+            Log.e(TAG, "weatherHandler===" + wh.weatherHandler(curCity));
             if (wh.weatherHandler(curCity).equals("false")) {
                 tView.setText("Not OK");
 //                runOnUiThread(new Runnable() {
@@ -183,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 //                    }
 //                });
             } else {
-                if (wh.weatherHandler(curCity).equals("false")) {
+                if (wh.weatherHandler(curCity).equals("true")) {
                     tView.setText("OK");
                 }
                 else{

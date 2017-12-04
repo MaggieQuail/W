@@ -1,6 +1,7 @@
 package com.example.mape0515.myapplication3;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -74,6 +75,14 @@ public class Main3Activity extends AppCompatActivity {
                 rangeSeekbarT.setMinStartValue(f1).setMaxStartValue(f2).apply();
                 tvMin.setText(st1.toString());
                 tvMin.setText(st2.toString());
+
+                Intent intent = new Intent();
+                intent.putExtra("Min", st1 );
+                setResult(RESULT_OK, intent);
+                Log.e(TAG, "After Finish " +st1 );
+                finish();
+                Log.e(TAG, "Intented " );
+
             }
         }
         rangeSeekbarT.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
@@ -143,10 +152,10 @@ public class Main3Activity extends AppCompatActivity {
         Log.e(TAG, "onLoad valueMax= " + valueMax + "  " );
         if(!(valueMin ==null))
         ar.add(valueMin);
-        Log.e(TAG, "onLoad ar.get(0)= " + ar.get(0) + "  " );
+    //    Log.e(TAG, "onLoad ar.get(0)= " + ar.get(0) + "  " );
         if(!(valueMax==null))
         ar.add(valueMax);
-        Log.e(TAG, "onLoad ar.get(1)= " + ar.size() + "  " );
+    //    Log.e(TAG, "onLoad ar.get(1)= " + ar.size() + "  " );
         return ar;
     }
 
